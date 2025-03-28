@@ -79,6 +79,7 @@ def save_prepared_data(df: pd.DataFrame, file_name: str) -> None:
         file_name (str): Name of the output file.
     """
     logger.info(f"FUNCTION START: save_prepared_data with file_name={file_name}, dataframe shape={df.shape}")
+    PREPARED_DATA_DIR.mkdir(parents=True, exist_ok=True)
     file_path = PREPARED_DATA_DIR.joinpath(file_name)
     df.to_csv(file_path, index=False)
     logger.info(f"Data saved to {file_path}")
