@@ -82,6 +82,9 @@ class TestDataScrubber(unittest.TestCase):
 
     def test_format_column_strings_to_upper_and_trim(self):
         df_formatted = self.scrubber.format_column_strings_to_upper_and_trim('Name')
+
+        print(df_formatted['Name'].head())  # Debugging step
+        
         self.assertEqual(df_formatted['Name'].str.contains(' ').sum(), 0, "Strings not formatted to uppercase correctly")
         self.assertTrue(df_formatted['Name'].str.isupper().all(), "Strings not formatted to uppercase correctly")
     
