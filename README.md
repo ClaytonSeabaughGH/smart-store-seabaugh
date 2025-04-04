@@ -11,24 +11,24 @@ Starter files to initialize the Smart Sales project.
 Run all commands from a terminal in the root project folder.
 
 #### Step 1A - Create a Local Project Virtual Environment
-    # python3 -m venv .venv
+    python3 -m venv .venv
 
 #### Step 1B - Activate the Virtual Environment
 
 - Mac/Linux:
-    # source .venv/bin/activate
+    source .venv/bin/activate
 
 - Windows:
-    # .venv\Scripts\activate
+    .venv\Scripts\activate
 
 #### Step 1C - Install Required Packages
-    # python3 -m pip install --upgrade -r requirements.txt
+    python3 -m pip install --upgrade -r requirements.txt
 
 #### Step 1D - Optional: Verify Virtual Environment Setup
-    # python3 -m datafun_venv_checker.venv_checker
+    python3 -m datafun_venv_checker.venv_checker
 
 #### Step 1E - Run the Initial Project Script
-    # python3 scripts/data_prep.py
+    python3 scripts/data_prep.py
 
 ---
 
