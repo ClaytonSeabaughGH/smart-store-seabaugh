@@ -3,109 +3,102 @@
 ## Smart Sales Starter Files
 Starter files to initialize the Smart Sales project.
 
+---
+
 ## Project Setup Guide
 
-### **1. Mac/Linux Setup**
+### Setup for All Platforms
 Run all commands from a terminal in the root project folder.
 
-#### **Step 1A - Create a Local Project Virtual Environment**
-```sh
-python3 -m venv .venv
-```
+#### Step 1A - Create a Local Project Virtual Environment
+    # python3 -m venv .venv
 
-#### **Step 1B - Activate the Virtual Environment**
-```sh
-source .venv/bin/activate
-```
+#### Step 1B - Activate the Virtual Environment
 
-#### **Step 1C - Install Required Packages**
-```sh
-python3 -m pip install --upgrade -r requirements.txt
-```
+- Mac/Linux:
+    # source .venv/bin/activate
 
-#### **Step 1D - Optional: Verify Virtual Environment Setup**
-```sh
-python3 -m datafun_venv_checker.venv_checker
-```
+- Windows:
+    # .venv\Scripts\activate
 
-#### **Step 1E - Run the Initial Project Script**
-```sh
-python3 scripts/data_prep.py
-```
+#### Step 1C - Install Required Packages
+    # python3 -m pip install --upgrade -r requirements.txt
+
+#### Step 1D - Optional: Verify Virtual Environment Setup
+    # python3 -m datafun_venv_checker.venv_checker
+
+#### Step 1E - Run the Initial Project Script
+    # python3 scripts/data_prep.py
 
 ---
 
-### **2. Windows Setup**
-Run all commands from a PowerShell terminal in the root project folder.
+## Database Schema & Design Choices
 
-#### **Step 2A - Create a Local Project Virtual Environment**
-```powershell
-py -m venv .venv
-```
+This project uses a **star schema** for organizing the SQLite sales data warehouse. The **fact table** (`sale`) records transactions, and the **dimension tables** (`customer`, `product`) provide lookup and filtering capabilities.
 
-#### **Step 2B - Activate the Virtual Environment**
-```powershell
-.venv\Scripts\activate
-```
+### Schema Overview
 
-#### **Step 2C - Install Required Packages**
-```powershell
-py -m pip install --upgrade -r requirements.txt
-```
+#### 🧾 customer Table
 
-#### **Step 2D - Optional: Verify Virtual Environment Setup**
-```powershell
-py -m datafun_venv_checker.venv_checker
-```
+| Column             | Type     | Description                                 |
+|--------------------|----------|---------------------------------------------|
+| customer_id        | INTEGER  | Primary key                                 |
+| name               | TEXT     | Full name of the customer                   |
+| region             | TEXT     | Geographic region                           |
+| join_date          | TEXT     | Date the customer joined                    |
+| loyalty_points     | REAL     | Loyalty point balance                       |
+| preferred_contact  | TEXT     | Preferred contact method                    |
 
-#### **Step 2E - Run the Initial Project Script**
-```powershell
-py scripts/data_prep.py
-```
+#### 📦 product Table
 
----
+| Column             | Type     | Description                                 |
+|--------------------|----------|---------------------------------------------|
+| product_id         | INTEGER  | Primary key                                 |
+| product_name       | TEXT     | Name of the product                         |
+| category           | TEXT     | Product category                            |
+| unit_price         | REAL     | Price per unit                              |
+| stock_quantity     | INTEGER  | Available stock                             |
+| supplier           | TEXT     | Supplier name                               |
 
-## **Initial Package List**
-The following Python packages are required for this project:
+#### 💰 sale Table *(Fact Table)*
 
-- `pip`
-- `loguru`
-- `ipykernel`
-- `jupyterlab`
-- `numpy`
-- `pandas`
-- `matplotlib`
-- `seaborn`
-- `plotly`
-- `pyspark==4.0.0.dev1`
-- `pyspark[sql]`
-- `git+https://github.com/denisecase/datafun-venv-checker.git#egg=datafun_venv_checker`
+| Column             | Type     | Description                                 |
+|--------------------|----------|---------------------------------------------|
+| sale_id            | INTEGER  | Primary key                                 |
+| customer_id        | INTEGER  | Foreign key → customer.customer_id          |
+| product_id         | INTEGER  | Foreign key → product.product_id            |
+| store_id           | INTEGER  | Store where the sale occurred               |
+| campaign_id        | INTEGER  | Marketing campaign identifier               |
+| sale_amount        | REAL     | Total sale amount                           |
+| sale_date          | TEXT     | Date of the sale                            |
+| discount_percent   | REAL     | Discount applied                            |
+| payment_type       | TEXT     | Method of payment                           |
 
 ---
 
-## **Git Workflow**
+## Git Workflow
+
 After making changes, use the following commands to commit and push updates to GitHub:
 
-```sh
-git add .
-git commit -m "Update README with commands"
-git push
-```
+    # git add .
+    # git commit -m "Update README with schema"
+    # git push
 
-Modify the commit message to describe your changes appropriately. Keeping good commit messages is essential for collaboration and tracking changes effectively.
+Modify the commit message to describe your changes appropriately.
 
 ---
 
-### **Markdown Preview**
+## Markdown Preview
+
 To preview this `README.md` file in VS Code:
 - Open the file.
 - Press `Ctrl + Shift + V` (Windows/Linux) or `Cmd + Shift + V` (Mac).
-- Alternatively, click the "Open Preview" button in the top-right corner.
+- Or click the "Open Preview" button in the top-right corner.
 
 ---
 
-## **Need Help?**
+## Need Help?
+
 For issues or troubleshooting, reach out via discussion forums or the project repository.
 
 Happy coding! 🚀
-
