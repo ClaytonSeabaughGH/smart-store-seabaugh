@@ -14,7 +14,7 @@ DW_DIR = pathlib.Path("data").joinpath("dw")
 DB_PATH = DW_DIR.joinpath("smart_sales.db")
 PREPARED_DATA_DIR = pathlib.Path("data").joinpath("prepared")
 
-def create_schem(cursor: sqlite3.Cursor) -> None:
+def create_schema(cursor: sqlite3.Cursor) -> None:
     """Create tables in the data warehouse if they don't exist."""
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS customer (
@@ -48,7 +48,7 @@ def create_schem(cursor: sqlite3.Cursor) -> None:
             payment_type TEXT,
             FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
             FOREIGN KEY (product_id) REFERENCES product (product_id)
-        )"
+        )
     """)
 
 def delete_existing_records(cursor: sqlite3.Cursor) -> None:
@@ -78,7 +78,7 @@ def load_data_to_db() -> None:
         cursor = conn.cursor()
 
         # Create schema and clear existing records
-        create_schem(cursor)
+        create_schema(cursor)
         delete_existing_records(cursor)
 
         # Load prepared data using pandas
