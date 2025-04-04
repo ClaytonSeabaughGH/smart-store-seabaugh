@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS sale (
     sale_id INTEGER PRIMARY KEY,
     customer_id INTEGER,
     product_id INTEGER,
+    store_id INTEGER,
     sale_amount REAL,
     sale_date TEXT,
     quantity INTEGER,
