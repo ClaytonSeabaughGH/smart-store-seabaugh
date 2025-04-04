@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS sale (
     sale_date TEXT,
     quantity INTEGER,
     discount_percent REAL,
-    payment_type TEXT
+    payment_type TEXT,
     FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
     FOREIGN KEY (product_id) REFERENCES product (product_id)
 );
+
