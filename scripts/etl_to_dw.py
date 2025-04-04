@@ -41,7 +41,7 @@ def create_schema(cursor: sqlite3.Cursor) -> None:
             sale_id INTEGER PRIMARY KEY,
             customer_id INTEGER,
             product_id INTEGER,
-            store_id INTEGER,
+            store_id,
             campaign_id INTEGER,
             sale_amount REAL,
             sale_date TEXT,
