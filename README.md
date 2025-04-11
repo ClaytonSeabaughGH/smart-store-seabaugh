@@ -86,10 +86,10 @@ This project uses a **star schema** for organizing the SQLite sales data warehou
   ORDER BY total_spent DESC
 
 ### Visuals
-![Dashboard](dashboard.png)
-![Schema](schmea.png)
-![Chart from Query](querychart.png)
-![Query](query.png)
+![Dashboard](C:\Users\clayt\Documents\smart-store-seabaugh\images\dashboard.png)
+![Schema](C:\Users\clayt\Documents\smart-store-seabaugh\images\schema.png)
+![Chart from Query](C:\Users\clayt\Documents\smart-store-seabaugh\images\querychart.png)
+![Query](C:\Users\clayt\Documents\smart-store-seabaugh\images\query.png)
 
 
 
