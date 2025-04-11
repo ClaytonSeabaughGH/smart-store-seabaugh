@@ -75,6 +75,24 @@ This project uses a **star schema** for organizing the SQLite sales data warehou
 | payment_type       | TEXT     | Method of payment                           |
 
 ---
+## Visualizations and SQL Queries
+### 💡 Key Queries:
+- **Top Customers:**
+  ```sql
+  SELECT c.name, SUM(s.amount) AS total_spent
+  FROM sale s
+  JOIN customer c ON s.customer_id = c.customer_id
+  GROUP BY c.name
+  ORDER BY total_spent DESC
+
+### Visuals
+![Dashboard](dashboard.png)
+![Schema](schmea.png)
+![Chart from Query](querychart.png)
+![Query](query.png)
+
+
+
 
 ## Git Workflow
 
