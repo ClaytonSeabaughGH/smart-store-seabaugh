@@ -12,3 +12,16 @@ Group these transactions by week.
 Group these transactions by region. 
 
 """
+
+# Library Imports
+import pandas as pd
+import matplotlib.pyplot as plt
+import pathlib
+import sys
+
+# Local imports
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.append(str(PROJECT_ROOT))
+
+    from utils.logger import logger
