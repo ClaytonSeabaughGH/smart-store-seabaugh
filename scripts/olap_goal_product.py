@@ -25,3 +25,11 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.append(str(PROJECT_ROOT))
 
     from utils.logger import logger
+
+# Constants
+OLAP_OUTPUT_DIR: pathlib.Path = pathlib.Path("data").joinpath("olap_cubing_outputs")
+CUBED_FILE: pathlib.Path = OLAP_OUTPUT_DIR.joinpath("multidimensional_olap_cube.csv")
+RESULTS_OUTPUT_DIR: pathlib.Path = pathlib.Path("data").joinpath("results")
+
+# Create output directory for results if it doesn't exist
+RESULTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
