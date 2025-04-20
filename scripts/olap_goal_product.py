@@ -108,7 +108,24 @@ def plot_top_selling_products(top_products):
     plt.axis('equal')
     plt.show()
 
+def main():
+    # Step 1: Get sales data
+    df = get_sales_data
 
+    # Step 2: Process sales data
+    top_products = process_sales_data(df)
+
+    # Step 3: Create OLAP Cube
+    olap_result = olap_cube(top_products)
+
+    # Step 4: Save the OLAP result to a CSV file
+    save_to_csv(olap_result, 'olap_cube_top_selling_products.csv')
+
+    # Step 5: Plot the results
+    plot_top_selling_products(top_products)
+
+if __name__ == '__main__':
+    main()
 
 
 
