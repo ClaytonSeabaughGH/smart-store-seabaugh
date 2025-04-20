@@ -89,6 +89,17 @@ def plot_top_selling_products(top_products):
     plt.tight_layout()
     plt.show()
 
+     # Plotting top-selling products trend over time (Line chart)
+    plt.figure(figsize=(10, 6))
+    sns.lineplot(data=top_products, x='week', y='quantity', hue='product_name', marker='o')
+    plt.title('Top-Selling Products Trend per Week')
+    plt.xlabel('Week')
+    plt.ylabel('Quantity Sold')
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+    plt.show()
+
+
 
 
 
