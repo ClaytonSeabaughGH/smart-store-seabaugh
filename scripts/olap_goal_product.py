@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 import pathlib
 import sys
 import sqlite3
+import seaborn as sns
 
 # Local imports
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -73,7 +74,20 @@ def save_to_csv(dataframe, filename='top_selling_products_per_week.csv'):
     # Save results to CSV file
     dataframe.to_csv(filename, index=True)
 
+def plot_top_selling_products(top_products):
+    # Set Seaborn style for better visualization
+    sns.set_theme(style='whitegrid')
 
+    # Plotting total quantity sold by product per region per week (Bar Chart)
+    plt.figure(figsize=(10,6))
+    sns.barplot(x='week', y='quantity', hue='product_name', data=top_products, ci=None)
+    plt.title('Top Selling Products per Week by Region')
+    plt.xlabel('Week')
+    plt.ylabel('Total Quantity Sold')
+    plt.xticks(rotation=90)
+    plt.legend(title='Product Name', bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+    plt.show()
 
 
 
