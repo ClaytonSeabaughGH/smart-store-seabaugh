@@ -36,7 +36,7 @@ RESULTS_OUTPUT_DIR: pathlib.Path = pathlib.Path("data").joinpath("results")
 RESULTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
-conn = sqlite3.connect('data\dw\smart_sales.db')
+conn = sqlite3.connect('data/dw/smart_sales.db')
 
 def get_sales_data():
     query = """
@@ -55,3 +55,21 @@ def get_sales_data():
         WHERE s.sale_date IS NOT NULL
     """
     return pd.read_sql(query, conn)
+
+def process_sales_data(df):
+    # Convert sale_date to datetime
+    df['sale_date'] = pd.to_datetime(df['sale_date'])
+
+    # Create a column for the week 
+    df['week'] = df['sale_date'].dt.strftime('%Y-%U') # Year-Week format
+
+    # Group by region, week, and product_name to calculate total quantity sold per product per week
+    weekly_sales = df.groupby(['region', 'week', 'product_name'])['quantity'].sum().reset_index()
+
+    # Find the product with the maximum quantity sold per region per week
+    top_products = weekly_sales.loc[weekly_sales.groupby(['region', 'week'])['quantity'].idmax()]
+
+    return top_products
+
+
+
