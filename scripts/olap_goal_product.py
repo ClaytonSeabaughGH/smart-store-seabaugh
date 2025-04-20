@@ -18,6 +18,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pathlib
 import sys
+import sqlite3
 
 # Local imports
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -33,3 +34,24 @@ RESULTS_OUTPUT_DIR: pathlib.Path = pathlib.Path("data").joinpath("results")
 
 # Create output directory for results if it doesn't exist
 RESULTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+conn = sqlite3.connect('data\dw\smart_sales.db')
+
+def get_sales_data():
+    query = """
+        SELECT
+            s.sale_id,
+            s.sale_date,
+            s.quantity,
+            s.sale_amount,
+            p.product_name,
+            p.category,
+            p.unit_price,
+            c.region
+        FROM sale s
+        JOIN product p ON s.product_id = p.product_id
+        Join customer c ON s.customer_id = c.customer_id
+        WHERE s.sale_date IS NOT NULL
+    """
+    return pd.read_sql(query, conn)
