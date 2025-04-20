@@ -27,13 +27,6 @@ if str(PROJECT_ROOT) not in sys.path:
 
     from utils.logger import logger
 
-# Constants
-OLAP_OUTPUT_DIR: pathlib.Path = pathlib.Path("data").joinpath("olap_cubing_outputs")
-CUBED_FILE: pathlib.Path = OLAP_OUTPUT_DIR.joinpath("multidimensional_olap_cube.csv")
-RESULTS_OUTPUT_DIR: pathlib.Path = pathlib.Path("data").joinpath("results")
-
-# Create output directory for results if it doesn't exist
-RESULTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 conn = sqlite3.connect('data/dw/smart_sales.db')
@@ -70,6 +63,14 @@ def process_sales_data(df):
     top_products = weekly_sales.loc[weekly_sales.groupby(['region', 'week'])['quantity'].idmax()]
 
     return top_products
+
+def olap_cube(df):
+    # Pivot table to emulate OLAP cube behavior
+    olap_cube = pd.pivot_table(df, values='quantity', index=['region', 'week'], columns='product_name', aggfunc='sum', fill_value=0 )
+    return olap_cube
+
+
+
 
 
 
