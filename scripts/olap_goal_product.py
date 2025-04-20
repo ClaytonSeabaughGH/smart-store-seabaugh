@@ -99,6 +99,15 @@ def plot_top_selling_products(top_products):
     plt.tight_layout()
     plt.show()
 
+    # Pie Chart for distribution of top-selling products in the latest week
+    latest_week = top_products['week'].max()
+    latest_week_data = top_products[top_products['week'] == latest_week]
+    plt.figure(figsize=(8,8))
+    plt.pie(latest_week_data)
+    plt.title(f"Top Selling Products Distribution in Week {latest_week}")
+    plt.axis('equal')
+    plt.show()
+
 
 
 
