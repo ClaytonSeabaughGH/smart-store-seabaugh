@@ -37,7 +37,6 @@ def get_sales_data():
         SELECT
             s.sale_id,
             s.sale_date,
-            s.quantity,
             s.sale_amount,
             p.product_name,
             p.category,
@@ -48,7 +47,10 @@ def get_sales_data():
         Join customer c ON s.customer_id = c.customer_id
         WHERE s.sale_date IS NOT NULL
     """
-    return pd.read_sql(query, conn)
+    df = pd.read_sql(query, conn)
+
+    df['quantity'] = df['sale_amount'] / df['unit_price'] 
+    return df
 
 def process_sales_data(df):
     # Convert sale_date to datetime
@@ -60,8 +62,9 @@ def process_sales_data(df):
     # Group by region, week, and product_name to calculate total quantity sold per product per week
     weekly_sales = df.groupby(['region', 'week', 'product_name'])['quantity'].sum().reset_index()
 
+
     # Find the product with the maximum quantity sold per region per week
-    top_products = weekly_sales.loc[weekly_sales.groupby(['region', 'week'])['quantity'].idmax()]
+    top_products = weekly_sales.loc[weekly_sales.groupby(['region', 'week'])['quantity'].idxmax()]
 
     return top_products
 
@@ -80,7 +83,7 @@ def plot_top_selling_products(top_products):
 
     # Plotting total quantity sold by product per region per week (Bar Chart)
     plt.figure(figsize=(10,6))
-    sns.barplot(x='week', y='quantity', hue='product_name', data=top_products, ci=None)
+    sns.barplot(x='week', y='quantity', hue='product_name', data=top_products, errorbar=None)
     plt.title('Top Selling Products per Week by Region')
     plt.xlabel('Week')
     plt.ylabel('Total Quantity Sold')
@@ -99,18 +102,12 @@ def plot_top_selling_products(top_products):
     plt.tight_layout()
     plt.show()
 
-    # Pie Chart for distribution of top-selling products in the latest week
-    latest_week = top_products['week'].max()
-    latest_week_data = top_products[top_products['week'] == latest_week]
-    plt.figure(figsize=(8,8))
-    plt.pie(latest_week_data)
-    plt.title(f"Top Selling Products Distribution in Week {latest_week}")
-    plt.axis('equal')
-    plt.show()
+
+
 
 def main():
     # Step 1: Get sales data
-    df = get_sales_data
+    df = get_sales_data()
 
     # Step 2: Process sales data
     top_products = process_sales_data(df)
