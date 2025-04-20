@@ -69,6 +69,10 @@ def olap_cube(df):
     olap_cube = pd.pivot_table(df, values='quantity', index=['region', 'week'], columns='product_name', aggfunc='sum', fill_value=0 )
     return olap_cube
 
+def save_to_csv(dataframe, filename='top_selling_products_per_week.csv'):
+    # Save results to CSV file
+    dataframe.to_csv(filename, index=True)
+
 
 
 
