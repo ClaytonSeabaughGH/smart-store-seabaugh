@@ -220,8 +220,35 @@ The data source for this analysis is a sales database stored in a SQLite data wa
 
 - Visualization issues were resolved by ensuring that only numeric values were included in the pie chart.
 
+## BI Goal with Dashboard
+### Section 1. The Business Goal
+Which product category is the top selling in each region? Is there a particular product we should be focusing on?
 
+### Section 2. Data Source
+All data can be found in the data file in the Data Warehouse data/dw/smart_sales.db
 
+### Section 3. Tools Used
+- Power BI to create the dashboard
+- SQLite3 for the database
+- Python Libraries to handle transforming/cleaning data
+
+### Section 4. Workflow & Logic
+- Started with a goal and hypothesis
+- Looking through data to find possible features needed
+- Applied features in several different graphs to generate and display insights
+
+### Section 5. Results (narrative + visualizations)
+- Laptops were the top selling product in each region and the top selling product overall
+- Jackets were the second highest; however, it wasn't close to the sale amount from laptops
+
+### Section 6. Suggested Business Action
+Focus more on producing Laptops and possibly expand more into the tech sector. Advertise our laptops more in the North region to generate more sales with laptops. 
+### Section 7. Challenges
+- Figuring out which visualizations to utilize
+- Properly displaying each chart with the correct features
+
+### Section 8. Ethical Considerations
+I did not include any customer information in the dashboard because I feel that they have a right to privacy and that it would not impact the results anyway. 
 
 ## Git Workflow
 
