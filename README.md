@@ -250,6 +250,8 @@ Focus more on producing Laptops and possibly expand more into the tech sector. A
 ### Section 8. Ethical Considerations
 I did not include any customer information in the dashboard because I feel that they have a right to privacy and that it would not impact the results anyway. 
 
+[Visualization Dashboard](image.png)
+
 ## Git Workflow
 
 After making changes, use the following commands to commit and push updates to GitHub:
